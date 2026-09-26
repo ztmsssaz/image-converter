@@ -1,293 +1,256 @@
-Image to WebP
+# Image to WebP
 
 A fast, lightweight, and fully offline desktop application for converting images to WebP.
 
-Built with Tauri 2, React, TypeScript, Vite, and Rust.
+Built with **Tauri 2**, **React**, **TypeScript**, **Vite**, and **Rust**.
 
-Overview
+Convert your images locally — no uploads, no servers, and no external APIs.
 
-Image to WebP is a local desktop image converter designed to convert images to the WebP format without uploading files to a server or relying on an external API.
+## ✨ Features
 
-All image processing is performed locally on the user’s computer.
+- 🖼️ Select multiple images
+- 📂 Drag & drop image files
+- 🔄 Convert images to WebP
+- 🎚️ Adjustable WebP quality
+- 📁 Choose a custom output directory
+- 📊 Display original and converted file sizes
+- ⚡ Local image processing with Rust
+- 🔒 Completely offline
+- 🚫 No server or API required
+- ♻️ Prevent duplicate files
+- 📋 Per-file conversion status
+- ❌ Per-file error handling
 
-The application is being designed with a focus on:
+## 🖥️ Supported Formats
 
-- Fast image conversion
-- Local and offline processing
-- Batch image conversion
-- Simple and clean user interface
-- Low memory usage
-- Native filesystem access
-- Cross-platform desktop support
-
-Tech Stack
-
-Frontend
-
-- React
-- TypeScript
-- Vite
-- Tailwind CSS
-
-Desktop
-
-- Tauri 2
-
-Image Processing
-
-- Rust
-- image
-- webp
-
-Architecture
-
-React + TypeScript
-│
-│ Tauri invoke
-▼
-Rust Commands
-│
-▼
-Image Processing
-│
-▼
-Local Filesystem
-
-The frontend is responsible for the user interface and application state, while Rust handles filesystem operations and image processing.
-
-Current Features
-
-- Select multiple images from the local filesystem
-- Drag and drop images into the application
-- Detect supported image formats
-- Display selected image information
-- Display file sizes
-- Prevent duplicate files from being added
-- Select an output directory
-- Configure WebP quality
-- Convert images locally to WebP
-- Display conversion status for each file
-- Display original and converted file sizes
-- Show conversion errors per file
-
-Supported Formats
-
-Currently supported input formats:
+**Input**
 
 - JPG
 - JPEG
 - PNG
 - GIF
 
-Output format:
+**Output**
 
 - WebP
 
-Additional formats may be added in future versions.
+> More formats will be added over time.
 
-Privacy
+## 🛠️ Tech Stack
 
-The application is designed to work completely locally.
+| Technology   | Purpose                        |
+| ------------ | ------------------------------ |
+| React        | User interface                 |
+| TypeScript   | Type-safe frontend development |
+| Vite         | Frontend build tooling         |
+| Tailwind CSS | UI styling                     |
+| Tauri 2      | Desktop application framework  |
+| Rust         | Native image processing        |
+| image        | Image decoding                 |
+| webp         | WebP encoding                  |
 
-Images are not:
+## 🏗️ Architecture
 
-- Uploaded to a server
-- Sent to an external API
-- Stored in a cloud service
-- Processed by a remote service
+```
+┌──────────────────────────────┐
+│        React + TypeScript     │
+│                                │
+│  File Selection                │
+│  Drag & Drop                   │
+│  Settings                      │
+│  Conversion Status             │
+└──────────────┬─────────────────┘
+               │
+               │ Tauri invoke
+               ▼
+┌──────────────────────────────┐
+│            Rust               │
+│                                │
+│  File System                   │
+│  Image Decoding                 │
+│  WebP Encoding                  │
+│  Conversion                     │
+└──────────────┬─────────────────┘
+               │
+               ▼
+        Local Filesystem
+```
 
-The conversion process happens directly on the user’s computer.
+The application uses React for the UI and Rust for native filesystem operations and image processing.
 
-Project Structure
+No image data needs to leave the user's computer.
 
+## 🔐 Privacy
+
+**Image to WebP** is designed as a local-first application.
+
+Your images are processed directly on your computer.
+
+The application does **not** require:
+
+- A backend server
+- An external API
+- Cloud storage
+- Image uploads
+- An internet connection
+
+Your files remain on your local filesystem.
+
+## 📁 Project Structure
+
+```
 image-to-webp/
 ├── src/
-│ ├── features/
-│ │ └── converter/
-│ │ ├── components/
-│ │ │ └── drop-zone.tsx
-│ │ ├── services/
-│ │ │ └── converter.ts
-│ │ ├── types/
-│ │ │ └── converter.ts
-│ │ └── utils/
-│ │ └── file.ts
-│ │
-│ ├── App.tsx
-│ └── ...
+│   ├── features/
+│   │   └── converter/
+│   │       ├── components/
+│   │       │   └── drop-zone.tsx
+│   │       ├── services/
+│   │       │   └── converter.ts
+│   │       ├── types/
+│   │       │   └── converter.ts
+│   │       └── utils/
+│   │           └── file.ts
+│   │
+│   ├── App.tsx
+│   └── ...
 │
 ├── src-tauri/
-│ ├── src/
-│ │ ├── commands/
-│ │ │ ├── converter.rs
-│ │ │ └── mod.rs
-│ │ ├── lib.rs
-│ │ └── main.rs
-│ │
-│ ├── capabilities/
-│ ├── Cargo.toml
-│ └── tauri.conf.json
+│   ├── src/
+│   │   ├── commands/
+│   │   │   ├── converter.rs
+│   │   │   └── mod.rs
+│   │   ├── lib.rs
+│   │   └── main.rs
+│   │
+│   ├── capabilities/
+│   ├── Cargo.toml
+│   └── tauri.conf.json
 │
 ├── package.json
 ├── vite.config.ts
 └── README.md
+```
 
-Development
+## 🚀 Getting Started
 
-Requirements
+### Prerequisites
 
-Make sure the following tools are installed:
+Make sure you have the following installed:
 
-- Node.js
-- npm
-- Rust
+- [Node.js](https://nodejs.org/)
+- [Rust](https://www.rust-lang.org/)
 - Cargo
-- Tauri prerequisites for your operating system
+- [Tauri prerequisites](https://tauri.app/start/prerequisites/) for your operating system
 
-Install Dependencies
+### Installation
 
-Clone the repository and install the frontend dependencies:
+Clone the repository:
 
+```bash
+git clone https://github.com/YOUR_USERNAME/image-to-webp.git
+cd image-to-webp
+```
+
+Install frontend dependencies:
+
+```bash
 npm install
+```
 
-Install Rust dependencies:
+Check the Rust dependencies:
 
+```bash
 cd src-tauri
 cargo check
 cd ..
+```
 
-Run Development Mode
+### Development
 
 Start the application in development mode:
 
+```bash
 npm run tauri dev
+```
 
 This starts the Vite development server and launches the Tauri desktop application.
 
-Build
+## 📦 Build
 
-To create a production desktop build:
+Create a production build with:
 
+```bash
 npm run tauri build
+```
 
-The generated installers and application bundles will be available under:
+The generated application bundles will be available in:
 
+```
 src-tauri/target/release/bundle/
+```
 
-The exact output depends on the operating system and configured Tauri targets.
+The generated files depend on the target operating system.
 
-How It Works
+## 🧭 Roadmap
 
-1. Select Images
+- [x] Image selection
+- [x] Drag & drop
+- [x] Multiple image selection
+- [x] Output directory selection
+- [x] WebP quality control
+- [x] Local WebP conversion
+- [x] Per-file conversion status
+- [x] File size comparison
+- [ ] Conversion queue
+- [ ] Parallel processing
+- [ ] Real-time conversion progress
+- [ ] Cancel active conversion
+- [ ] Lossless WebP mode
+- [ ] Image resizing
+- [ ] Custom output filenames
+- [ ] Automatic filename conflict handling
+- [ ] Preserve folder structure
+- [ ] Image previews
+- [ ] AVIF support
+- [ ] BMP support
+- [ ] TIFF support
+- [ ] HEIC support
+- [ ] Metadata handling
+- [ ] Dark mode
+- [ ] Cross-platform release builds
 
-Users can select one or more supported images using the native file picker or drag and drop files directly into the application.
+## 🤝 Contributing
 
-2. Read File Information
+Contributions, bug reports, and feature requests are welcome.
 
-The application retrieves basic file metadata such as:
+To contribute:
 
-- File name
-- File path
-- File size
-- File extension
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test the application
+5. Open a pull request
 
-Only the information required by the application is handled by the frontend.
+Before submitting a pull request, make sure the project builds successfully:
 
-3. Select Output Directory
-
-The user chooses where the converted WebP files should be saved.
-
-4. Configure Quality
-
-The WebP quality can be configured before starting the conversion.
-
-5. Convert
-
-The React application sends the conversion request to Rust through the Tauri command system.
-
-Rust then:
-
-1. Opens the source image
-2. Decodes the image
-3. Encodes it as WebP
-4. Writes the resulting file to the selected directory
-5. Returns conversion information to the frontend
-
-6. Display Results
-
-The frontend displays the conversion result, including the output path and file size.
-
-Design Goals
-
-The project is intentionally built around a native desktop architecture rather than a traditional web application.
-
-Local Processing
-
-Image files can be large, so processing them locally avoids unnecessary network transfers and server-side processing.
-
-Rust for Image Processing
-
-Rust is used for filesystem operations and image conversion to provide a native processing layer that can later support:
-
-- Parallel conversion
-- Large batches
-- Progress reporting
-- Cancellation
-- Memory-efficient processing
-- Additional image formats
-
-React for UI
-
-React is responsible for:
-
-- Application state
-- File list management
-- Conversion controls
-- Progress display
-- User interaction
-- Error presentation
-
-Roadmap
-
-Planned improvements include:
-
-- Batch conversion optimization
-- Parallel image processing
-- Real-time conversion progress
-- Cancel conversion
-- Conversion queue
-- Before/after file size comparison
-- Lossy and lossless WebP modes
-- Better quality controls
-- Image resizing
-- Preserve original folder structure
-- Custom output filenames
-- Automatic filename conflict handling
-- Image previews
-- AVIF support
-- BMP support
-- TIFF support
-- HEIC support
-- Metadata handling
-- Dark mode
-- Improved error reporting
-- Cross-platform release builds
-
-Contributing
-
-Contributions, improvements, and bug reports are welcome.
-
-Before submitting changes, make sure the project builds successfully:
-
+```bash
 npm run tauri dev
+```
 
 and verify the Rust code:
 
+```bash
 cd src-tauri
 cargo check
+```
 
-License
+## 📄 License
 
 This project is currently under development.
 
-The license will be added before the first public release.
+A license will be added before the first public release.
+
+---
+
+Made with ❤️ using React, Tauri, and Rust.
